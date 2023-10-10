@@ -18,7 +18,7 @@ public class MercadoMasCercano implements FiltradorPorCriterio{
                 .filter(mercado -> mercado.getNombre().equals(nombreDelMercadoMasCercano))
                 .findFirst();
 
-            return mercadoEncontrado.orElse(null);
+            return mercadoEncontrado.orElse(mercados.get(0));
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
