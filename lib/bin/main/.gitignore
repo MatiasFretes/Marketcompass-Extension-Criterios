@@ -1,4 +1,10 @@
-/Main.class
-/MercadoMasCercano.class
-/implementacion/
-/mocksParaTest/
+/Distancia.class
+/Precio.class
+/mercados.json
+/Distancia$Mercado.class
+/main.class
+/Mercado.class
+/MercadosJsonParser.class
+/MercadosJsonParser$1.class
+/MercadosUtils$1.class
+/MercadosUtils.class
