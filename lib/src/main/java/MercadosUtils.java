@@ -13,13 +13,17 @@ public class MercadosUtils {
 	    return mapper.readValue(Files.readAllBytes(Paths.get("src/test/resources/mercados.json")), new TypeReference<List<Mercado>>() {});
 	}
 	
-	public List<Mercado> buscarProductosEnMercados (List<String> productos) throws Exception {
+	public List<Mercado> buscarProductosEnMercados (List<String> productos) {
 		List<Mercado> mercadosConTodosLosProductos = new ArrayList<>();
 		List<Mercado> mercadosConAlMenosUnProducto = new ArrayList<>();
+		List<Mercado> mercadosJson = new ArrayList<>();
+		try {
+			mercadosJson = obtenerMercadosDelJson();
+		} catch (Exception e) {
+			return mercadosJson;
+		}
 		
-		List<Mercado> mercados = obtenerMercadosDelJson();
-		
-		for (Mercado mercado : mercados) {
+		for (Mercado mercado : mercadosJson) {
 		    List<String> productosMercado = mercado.getProductos();
 		    if (productosMercado.containsAll(productos))
 		        mercadosConTodosLosProductos.add(mercado);

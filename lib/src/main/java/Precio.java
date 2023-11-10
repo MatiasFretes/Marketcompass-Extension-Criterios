@@ -12,8 +12,8 @@ public class Precio implements SeleccionadorPorCriterio{
     	List<Mercado> mercadosConProductos = new ArrayList<>();
     	try {
 			mercadosConProductos = mercadosJsonParser.buscarProductosEnMercados(productos);	
-			if (mercadosConProductos.isEmpty())
-				return "Sin recomendacion";
+			if (mercadosConProductos == null || mercadosConProductos.isEmpty())
+				return "";
 			mercadosConProductos.sort(Comparator.comparing(Mercado::getNombre));
 
 		} catch (Exception e) {

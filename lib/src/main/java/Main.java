@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class main {
+public class Main {
 
 	public static void main(String[] args) {
 		Distancia distancia = new Distancia();
