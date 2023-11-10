@@ -5,12 +5,12 @@ public class Main {
 	public static void main(String[] args) {
 		Distancia distancia = new Distancia();
 
-		System.out.println(distancia.seleccionarMercado(Arrays.asList("P2")));
+		System.out.println(distancia.seleccionarMercado(Arrays.asList("P1")));
 		
 		
 		Precio precio = new Precio();
 
-		System.out.println(precio.seleccionarMercado(Arrays.asList("P2")));
+		System.out.println(precio.seleccionarMercado(Arrays.asList("p2")));
 	}
 
 }

@@ -30,16 +30,13 @@ dependencies {
     implementation 'com.google.guava:guava:29.0-jre'
     
     implementation 'com.github.MatiasFretes:Marketcompass-Core:c4526e02af'
-       
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.5'
    }
 
 apply plugin: 'java'
 
-// Esto asegura que las dependencias del proyecto se incluyan en el JAR
 jar {
     from sourceSets.main.output
     manifest {
-        attributes 'Main-Class': 'DistanciaProject.Main' // Reemplaza con la clase principal de tu proyecto Core
+        attributes 'Main-Class': 'DistanciaProject.Main'
     }
 }

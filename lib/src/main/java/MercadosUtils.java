@@ -1,34 +1,24 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.stream.Collectors;
 
 public class MercadosUtils {
 
-	public List<Mercado> obtenerMercadosDelJson() throws Exception{
-		ObjectMapper mapper = new ObjectMapper(); 
-	    return mapper.readValue(Files.readAllBytes(Paths.get("src/test/resources/mercados.json")), new TypeReference<List<Mercado>>() {});
-	}
-	
 	public List<Mercado> buscarProductosEnMercados (List<String> productos) {
+
+		List<String> productosUsuario = productos.stream().map(String::toLowerCase).collect(Collectors.toList());
+
 		List<Mercado> mercadosConTodosLosProductos = new ArrayList<>();
 		List<Mercado> mercadosConAlMenosUnProducto = new ArrayList<>();
-		List<Mercado> mercadosJson = new ArrayList<>();
-		try {
-			mercadosJson = obtenerMercadosDelJson();
-		} catch (Exception e) {
-			return mercadosJson;
-		}
+		List<Mercado> mercadosJson = MercadosMocks.obtenerMercados();
 		
 		for (Mercado mercado : mercadosJson) {
-		    List<String> productosMercado = mercado.getProductos();
-		    if (productosMercado.containsAll(productos))
+		    List<String> productosMercado = mercado.getProductos().stream().map(String::toLowerCase).collect(Collectors.toList());
+		    if (productosMercado.containsAll(productosUsuario))
 		        mercadosConTodosLosProductos.add(mercado);
 		    
-		    if (!Collections.disjoint(productosMercado, productos)) 
+		    if (!Collections.disjoint(productosMercado, productosUsuario)) 
 		        mercadosConAlMenosUnProducto.add(mercado);
 		}
 		
