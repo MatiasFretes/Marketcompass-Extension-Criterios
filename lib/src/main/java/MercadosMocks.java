@@ -6,9 +6,8 @@ public class MercadosMocks {
 	
 	public static List<Mercado> obtenerMercadosTest(){
 		List<Mercado> mercados = new ArrayList<>();
-		
-		mercados.add(new Mercado("B", Arrays.asList("P1", "P2")));
 		mercados.add(new Mercado("A", Arrays.asList("P2")));
+		mercados.add(new Mercado("B", Arrays.asList("P1", "P2")));
 		
 		return mercados;
 	}

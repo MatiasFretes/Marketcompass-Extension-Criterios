@@ -1,32 +1,31 @@
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MercadosUtils {
 
-	public List<Mercado> buscarProductosEnMercados (List<String> productos) {
+	public List<Mercado> buscarProductosEnMercados(List<String> productos) {
+        List<Mercado> mercadosJson = MercadosMocks.obtenerMercadosTest();
 
-		List<String> productosUsuario = productos.stream().map(String::toLowerCase).collect(Collectors.toList());
+        Map<Mercado, Long> cantidadProductosPorMercado = mercadosJson.stream()
+                .collect(Collectors.toMap(
+                        mercado -> mercado,
+                        mercado -> productos.stream().filter(mercado.getProductos()::contains).count()
+                ));
 
-		List<Mercado> mercadosConTodosLosProductos = new ArrayList<>();
-		List<Mercado> mercadosConAlMenosUnProducto = new ArrayList<>();
-		List<Mercado> mercadosJson = MercadosMocks.obtenerMercados();
-		
-		for (Mercado mercado : mercadosJson) {
-		    List<String> productosMercado = mercado.getProductos().stream().map(String::toLowerCase).collect(Collectors.toList());
-		    if (productosMercado.containsAll(productosUsuario))
-		        mercadosConTodosLosProductos.add(mercado);
-		    
-		    if (!Collections.disjoint(productosMercado, productosUsuario)) 
-		        mercadosConAlMenosUnProducto.add(mercado);
-		}
-		
-		if (!mercadosConTodosLosProductos.isEmpty()) 
-			return mercadosConTodosLosProductos;
-		else if (!mercadosConAlMenosUnProducto.isEmpty()) 
-		    return mercadosConAlMenosUnProducto;
-		else 
-		    return null;
-	}
+        long maxCantidadProductos = cantidadProductosPorMercado.values().stream()
+                .max(Comparator.naturalOrder())
+                .orElse(0L);
+        
+        if(maxCantidadProductos == 0) return new ArrayList<>();
+
+        List<Mercado> mercadosConMaxCantidadProductos = cantidadProductosPorMercado.entrySet().stream()
+                .filter(entry -> entry.getValue() == maxCantidadProductos)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+
+        return mercadosConMaxCantidadProductos;
+    }
 }

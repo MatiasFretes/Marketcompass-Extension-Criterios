@@ -3,7 +3,7 @@ import java.util.Comparator;
 import java.util.List;
 import extensible.SeleccionadorPorCriterio;
 
-public class Distancia implements SeleccionadorPorCriterio {
+public class Disponibilidad implements SeleccionadorPorCriterio {
 
     @Override
     public String seleccionarMercado(List<String> productos) {

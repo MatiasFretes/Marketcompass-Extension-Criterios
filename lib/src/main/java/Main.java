@@ -3,14 +3,10 @@ import java.util.Arrays;
 public class Main {
 
 	public static void main(String[] args) {
-		Distancia distancia = new Distancia();
+		Disponibilidad disponibilidad = new Disponibilidad();
 
-		System.out.println(distancia.seleccionarMercado(Arrays.asList("P1")));
+		System.out.println(disponibilidad.seleccionarMercado(Arrays.asList("P2", "P3")));
 		
-		
-		Precio precio = new Precio();
-
-		System.out.println(precio.seleccionarMercado(Arrays.asList("p2")));
 	}
 
 }
