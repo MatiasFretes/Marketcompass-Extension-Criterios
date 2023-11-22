@@ -6,10 +6,14 @@ import java.util.stream.Collectors;
 
 public class MercadosUtils {
 
-	public List<Mercado> buscarProductosEnMercados(List<String> productos) {
-        List<Mercado> mercadosJson = MercadosMocks.obtenerMercadosTest();
+	public List<Mercado> buscarProductosEnMercados(List<String> productos, List<String> nombreMercados) {
+        List<Mercado> mercadosDisponibles = MercadosMocks.obtenerMercadosTest();
+        
+        List<Mercado> mercadosFiltrados = mercadosDisponibles.stream()
+                .filter(mercado -> nombreMercados.contains(mercado.getNombre()))
+                .collect(Collectors.toList());
 
-        Map<Mercado, Long> cantidadProductosPorMercado = mercadosJson.stream()
+        Map<Mercado, Long> cantidadProductosPorMercado = mercadosFiltrados.stream()
                 .collect(Collectors.toMap(
                         mercado -> mercado,
                         mercado -> productos.stream().filter(mercado.getProductos()::contains).count()
